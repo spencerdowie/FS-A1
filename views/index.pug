@@ -8,7 +8,7 @@ block main-content
             div.category-view
                 for game in games
                     figure
-                        img(src="./images/"+game.thumbnailPath)
+                        a(href=game.url): img(src="./images/"+game.thumbnailPath)
                         figcaption.project-title #{game.name}, #{game.releaseYear}
         div#web-projects
             h2.category-title Web Projects
