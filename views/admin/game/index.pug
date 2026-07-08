@@ -1,0 +1,50 @@
+extends ../../layout 
+
+block main-content 
+    h1.page-title Games Projects
+    a(href='/admin/game/add').button + Add Game 
+    table 
+        thead 
+            tr 
+                th Title 
+                th Release Year
+                th URL 
+                th
+        tbody 
+            each game in games 
+                tr
+                    if (editGame == game._id) 
+                        form(method="post", action="/admin/game/edit")
+                            input(type="hidden", name="gameID", value=game._id)
+                            td 
+                                input(type="text", id="game-name", name="name", value=game.name)
+                            td 
+                                input(type="text", id="date", name="date", value=game.releaseYear)
+                            td 
+                                input(type="text", id="url", name="url", value=game.url)
+                            td.manage-actions
+                                button(type="submit"): span.material-symbols-outlined check
+                                a(href='/admin/game').button: span.material-symbols-outlined cancel
+                    else 
+                        td #{game.name}
+                        td #{game.releaseYear}
+                        td #{game.url}
+                        td.manage-actions
+                            form(method="get", action="/admin/game/edit")
+                                input(type="hidden", name="gameID", value=game._id)
+                                button(type="submit"): span.material-symbols-outlined edit_square
+                            form(method="post", action="/admin/game/delete")
+                                input(type="hidden", name="gameID", value=game._id)
+                                button(type="submit"): span.material-symbols-outlined delete
+            if (addGame)
+                tr
+                    form(method="post", action="/admin/game/add")
+                        td 
+                            input(type="text", id="game-name", name="name")
+                        td 
+                            input(type="text", id="date", name="date")
+                        td 
+                            input(type="text", id="url", name="url")
+                        td.manage-actions
+                            button(type="submit"): span.material-symbols-outlined check
+                            a(href='/admin/game').button: span.material-symbols-outlined cancel       

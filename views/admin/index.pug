@@ -1,0 +1,18 @@
+extends ../layout 
+
+block main-content 
+    h1.page-title Admin Dashboard
+    h2 Welcome, #{user} 
+    h3 Portfolio Categories
+    #categories
+        a(href="admin/game").button Games
+        a(href="admin/web").button Web
+    h3 APIs 
+    table#api-list 
+        tbody 
+            tr
+                td: a(href="/api/games").button Get All Game Projects
+                td: code api/games
+            tr
+                td: a(href="/api/web").button Get All Web Projects
+                td: code api/web
