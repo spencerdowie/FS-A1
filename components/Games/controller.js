@@ -3,9 +3,9 @@ import gameModel from "./model.js";
 const getAllGames = async (request, response) => {
   let gameList = await gameModel.getGames();
   //if there's nothing in the pets collection, initialize with some content then get the pets again
-  console.log(gameList);
+  //console.log(gameList);
   if (!gameList.length) {
-    console.log("Creating Data");
+    //console.log("Creating Data");
     await gameModel.initializeGames();
     gameList = await gameModel.getGames();
   }

@@ -19,12 +19,12 @@ const loginForm = (req, res) => {
 const login = async (req, res) => {
   //authenticate user and redirect to /user
   let auth = await userModel.authenticateUser(req.body.u, req.body.pw);
-  console.log(auth);
+  //console.log(auth);
   if (auth) {
     //if authenticated, set session variables
     req.session.loggedIn = true;
     req.session.user = req.body.u;
-    console.log(req.session);
+    //console.log(req.session);
     //now redirect to /user
     res.redirect("/admin");
   } else {
@@ -45,7 +45,7 @@ const registerForm = (req, res) => {
 const register = async (req, res) => {
   //get values from form and create new user
   let result = await userModel.addUser(req.body.u, req.body.pw);
-  console.log(`result: ${result}`);
+  //console.log(`result: ${result}`);
   if (result) {
     res.redirect("/login");
   } else {
