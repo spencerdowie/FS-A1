@@ -9,6 +9,7 @@ block main-content
                 th Title 
                 th Release Year
                 th URL 
+                th Thumbnail Path
                 th
         tbody 
             each game in games 
@@ -22,6 +23,8 @@ block main-content
                                 input(type="text", id="date", name="date", value=game.releaseYear)
                             td 
                                 input(type="text", id="url", name="url", value=game.url)
+                            td 
+                                input(type="text", id="path", name="path", value=game.thumbnailPath)
                             td.manage-actions
                                 button(type="submit"): span.material-symbols-outlined check
                                 a(href='/admin/game').button: span.material-symbols-outlined cancel
@@ -29,6 +32,7 @@ block main-content
                         td #{game.name}
                         td #{game.releaseYear}
                         td #{game.url}
+                        td #{game.thumbnailPath}
                         td.manage-actions
                             form(method="get", action="/admin/game/edit")
                                 input(type="hidden", name="gameID", value=game._id)
@@ -45,6 +49,8 @@ block main-content
                             input(type="text", id="date", name="date")
                         td 
                             input(type="text", id="url", name="url")
+                        td 
+                            input(type="text", id="path", name="path")
                         td.manage-actions
                             button(type="submit"): span.material-symbols-outlined check
                             a(href='/admin/game').button: span.material-symbols-outlined cancel       

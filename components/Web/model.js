@@ -3,7 +3,7 @@ import mongoose from "mongoose";
 const WebSchema = new mongoose.Schema({
   name: String,
   releaseYear: String,
-  url: String
+  description: String
 }); //, { collection: "games"});
 const Web = mongoose.model("Web", WebSchema);
 
@@ -23,34 +23,38 @@ async function getWebByID(webID) {
 async function initializeWebProjects() {
   const webProjList = [
     {
-      name: "SLIH",
-      releaseYear: "2020"
+      name: "HSPP",
+      releaseYear: "2020",
+      description: "A edutainment game created for Humber and Seneca Colleges."
     },
     {
-      name: "DEW",
-      releaseYear: "2026"
+      name: "DND",
+      releaseYear: "2026",
+      description: ""
     }
   ];
   await Web.insertMany(webProjList);
 }
 
-async function addWebProject(name, releaseYear, url) {
+async function addWebProject(name, releaseYear, description) {
   let newWebProject = new Web({
     name: name,
     releaseYear: releaseYear,
-    url: url
+    description: description
   });
   let result = await newWebProject.save();
 
   return result === newWebProject ? true : false;
 }
 
-async function editWebProject(id, name, releaseYear, url) {
+async function editWebProject(id, name, releaseYear, description) {
   let result = await Web.findByIdAndUpdate(id, {
     name: name,
     releaseYear: releaseYear,
-    url: url
+    description: description
   });
+
+  console.log(id);
 
   return result.modifiedCount == 1 ? true : false;
 }

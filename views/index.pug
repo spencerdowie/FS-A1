@@ -3,4 +3,17 @@ extends layout
 block main-content 
     h1.page-title Portfolio
     .main-content
-        img(src="./images/DEW_Logo.jpg")
+        div#game-projects
+            h2.category-title Game Projects
+            div.category-view
+                for game in games
+                    figure
+                        img(src="./images/"+game.thumbnailPath)
+                        figcaption.project-title #{game.name}, #{game.releaseYear}
+        div#web-projects
+            h2.category-title Web Projects
+            div.category-view
+                for web in webProjects
+                    div.web-project
+                        h3.project-title #{web.name}, #{web.releaseYear}
+                        p #{web.description}

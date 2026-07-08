@@ -3,7 +3,9 @@ import gameModel from "./model.js";
 const getAllGames = async (request, response) => {
   let gameList = await gameModel.getGames();
   //if there's nothing in the pets collection, initialize with some content then get the pets again
+  console.log(gameList);
   if (!gameList.length) {
+    console.log("Creating Data");
     await gameModel.initializeGames();
     gameList = await gameModel.getGames();
   }
@@ -19,7 +21,7 @@ const gamesApi = async (req, res) => {
 //GET
 const addGameForm = async (req, res) => {
   let gameList = await gameModel.getGames();
-  res.render("admin/game", { addGame: true, games:gameList });
+  res.render("admin/game", { addGame: true, games: gameList });
 };
 
 //POST
@@ -27,7 +29,8 @@ const addGame = async (req, res) => {
   let result = await gameModel.addGame(
     req.body.name,
     req.body.date,
-    req.body.url
+    req.body.url,
+    req.body.path
   );
   let gameList = await gameModel.getGames();
   res.render("admin/game/index", { games: gameList });
@@ -46,7 +49,8 @@ const editGame = async (req, res) => {
     req.body.gameID,
     req.body.name,
     req.body.date,
-    req.body.url
+    req.body.url,
+    req.body.path
   );
   let gameList = await gameModel.getGames();
   res.render("admin/game", { games: gameList });

@@ -8,7 +8,7 @@ const getAllWebProjects = async (request, response) => {
     webList = await webModel.getWebProjects();
   }
   //console.log(gameList);
-  response.render("admin/web/index", { projects: webList });
+  response.render("admin/web", { projects: webList });
 };
 
 const webProjectsApi = async (req, res) => {
@@ -27,17 +27,17 @@ const addWebProject = async (req, res) => {
   let result = await webModel.addWebProject(
     req.body.name,
     req.body.date,
-    req.body.url
+    req.body.description
   );
   let webList = await webModel.getWebProjects();
-  res.render("admin/web/index", { projects: webList });
+  res.render("admin/web", { projects: webList });
 };
 
 //GET
 const editWebProjectForm = async (req, res) => {
   let webList = await webModel.getWebProjects();
   //let project = await webModel.getWebByID(req.query.webID);
-  res.render("admin/web/edit", {
+  res.render("admin/web", {
     editProject: req.query.webID,
     projects: webList
   });
@@ -46,13 +46,13 @@ const editWebProjectForm = async (req, res) => {
 //POST
 const editWebProject = async (req, res) => {
   let result = await webModel.editWebProject(
-    req.body.gameID,
+    req.body.projectID,
     req.body.name,
     req.body.date,
-    req.body.url
+    req.body.description
   );
   let webList = await webModel.getWebProjects();
-  res.render("admin/game", { projects: webList });
+  res.render("admin/web", { projects: webList });
 };
 
 const deleteWebProject = async (req, res) => {

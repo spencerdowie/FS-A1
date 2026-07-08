@@ -8,12 +8,12 @@ block main-content
             tr 
                 th Title 
                 th Release Year
-                th URL 
+                th Description
                 th
         tbody 
             each project in projects 
                 tr
-                    if (editWeb == project._id)
+                    if (editProject == project._id)
                         form(method="post", action="/admin/web/edit")
                             input(type="hidden", name="projectID", value=project._id)
                             td 
@@ -21,7 +21,7 @@ block main-content
                             td 
                                 input(type="text", id="date", name="date", value=project.releaseYear)
                             td 
-                                input(type="text", id="url", name="url", value=project.url)
+                                textarea(id="description", name="description", value=project.description)
                             td.manage-actions
                                 button(type="submit"): span.material-symbols-outlined check
                                 a(href='/admin/web').button: span.material-symbols-outlined cancel
@@ -29,7 +29,7 @@ block main-content
                     else 
                         td #{project.name}
                         td #{project.releaseYear}
-                        td #{project.url}
+                        td #{project.description}
                         td.manage-actions
                             form(action="/admin/web/edit")
                                 input(type="hidden", name="webID", value=project._id)
@@ -44,7 +44,7 @@ block main-content
             td 
                 input(type="text", id="date", name="date")
             td 
-                input(type="text", id="url", name="url")
+                textarea(id="description", name="description")
             td.manage-actions
                 button(type="submit"): span.material-symbols-outlined check
                 a(href='/admin/web').button: span.material-symbols-outlined cancel    
